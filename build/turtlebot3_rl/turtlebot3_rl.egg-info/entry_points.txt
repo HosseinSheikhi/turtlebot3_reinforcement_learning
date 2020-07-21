@@ -1,0 +1,5 @@
+[console_scripts]
+turtlebot3_dqn_agent = turtlebot3_rl.turtlebot3_dqn_agent.turtlebot3_dqn_agent:main
+turtlebot3_env = turtlebot3_rl.turtlebot3_env.turtlebot3_env:main
+turtlebot3_gazebo = turtlebot3_rl.turtlebot3_gazebo.turtlebot3_gazebo:main
+

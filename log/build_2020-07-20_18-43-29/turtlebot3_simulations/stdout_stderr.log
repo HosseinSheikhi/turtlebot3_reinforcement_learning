@@ -1,0 +1,20 @@
+-- Found ament_cmake: 0.7.4 (/opt/ros/dashing/share/ament_cmake/cmake)
+-- Using PYTHON_EXECUTABLE: /home/hossein/tf_ros/bin/python3
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/hossein/turtlebot3_rl/build/turtlebot3_simulations
+[36mInstall the project...[0m
+-- Install configuration: ""
+-- Execute custom install script
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/ament_index/resource_index/package_run_dependencies/turtlebot3_simulations
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/ament_index/resource_index/parent_prefix_path/turtlebot3_simulations
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/environment/ament_prefix_path.sh
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/environment/path.sh
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/local_setup.bash
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/local_setup.sh
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/local_setup.zsh
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/ament_index/resource_index/packages/turtlebot3_simulations
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/cmake/turtlebot3_simulationsConfig.cmake
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/cmake/turtlebot3_simulationsConfig-version.cmake
+-- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_simulations/share/turtlebot3_simulations/package.xml

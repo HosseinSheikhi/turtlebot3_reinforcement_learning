@@ -1,0 +1,50 @@
+[0.060s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_navigation2': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake /home/hossein/turtlebot3_rl/src/turtlebot3/turtlebot3/turtlebot3_navigation2 -DCMAKE_INSTALL_PREFIX=/home/hossein/turtlebot3_rl/install/turtlebot3_navigation2
+[1.088s] -- The C compiler identification is GNU 7.5.0
+[1.088s] -- The CXX compiler identification is GNU 7.5.0
+[1.089s] -- Check for working C compiler: /usr/bin/cc
+[1.089s] -- Check for working C compiler: /usr/bin/cc -- works
+[1.089s] -- Detecting C compiler ABI info
+[1.089s] -- Detecting C compiler ABI info - done
+[1.090s] -- Detecting C compile features
+[1.091s] -- Detecting C compile features - done
+[1.091s] -- Check for working CXX compiler: /usr/bin/c++
+[1.092s] -- Check for working CXX compiler: /usr/bin/c++ -- works
+[1.092s] -- Detecting CXX compiler ABI info
+[1.170s] -- Detecting CXX compiler ABI info - done
+[1.183s] -- Detecting CXX compile features
+[1.872s] -- Detecting CXX compile features - done
+[1.877s] -- Found ament_cmake: 0.7.4 (/opt/ros/dashing/share/ament_cmake/cmake)
+[1.932s] -- Found PythonInterp: /home/hossein/tf_ros/bin/python3 (found suitable version "3.6.9", minimum required is "3") 
+[1.932s] -- Using PYTHON_EXECUTABLE: /home/hossein/tf_ros/bin/python3
+[2.247s] -- Configuring done
+[2.249s] -- Generating done
+[2.250s] -- Build files have been written to: /home/hossein/turtlebot3_rl/build/turtlebot3_navigation2
+[2.254s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_navigation2' returned '0': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake /home/hossein/turtlebot3_rl/src/turtlebot3/turtlebot3/turtlebot3_navigation2 -DCMAKE_INSTALL_PREFIX=/home/hossein/turtlebot3_rl/install/turtlebot3_navigation2
+[2.259s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_navigation2': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_navigation2 -- -j8 -l8
+[2.333s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_navigation2' returned '0': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_navigation2 -- -j8 -l8
+[2.398s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_navigation2': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_navigation2 --target install -- -j8 -l8
+[2.484s] [36mInstall the project...[0m
+[2.495s] -- Install configuration: ""
+[2.495s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/launch
+[2.498s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/launch/navigation2.launch.py
+[2.498s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/map
+[2.499s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/map/map.yaml
+[2.499s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/map/map.pgm
+[2.499s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/param
+[2.499s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/param/waffle_pi.yaml
+[2.499s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/param/waffle.yaml
+[2.499s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/param/burger.yaml
+[2.500s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/rviz
+[2.500s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/rviz/tb3_navigation2.rviz
+[2.500s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/ament_index/resource_index/package_run_dependencies/turtlebot3_navigation2
+[2.500s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/ament_index/resource_index/parent_prefix_path/turtlebot3_navigation2
+[2.500s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/environment/ament_prefix_path.sh
+[2.500s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/environment/path.sh
+[2.501s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/local_setup.bash
+[2.501s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/local_setup.sh
+[2.501s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/local_setup.zsh
+[2.501s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/ament_index/resource_index/packages/turtlebot3_navigation2
+[2.501s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/cmake/turtlebot3_navigation2Config.cmake
+[2.502s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/cmake/turtlebot3_navigation2Config-version.cmake
+[2.509s] -- Installing: /home/hossein/turtlebot3_rl/install/turtlebot3_navigation2/share/turtlebot3_navigation2/package.xml
+[2.509s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_navigation2' returned '0': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_navigation2 --target install -- -j8 -l8

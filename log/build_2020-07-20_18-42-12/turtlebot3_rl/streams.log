@@ -1,0 +1,23 @@
+[1.087s] Invoking command in '/home/hossein/turtlebot3_rl/src/turtlebot3_rl': PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base /home/hossein/turtlebot3_rl/build/turtlebot3_rl build --build-base /home/hossein/turtlebot3_rl/build/turtlebot3_rl/build install --prefix /home/hossein/turtlebot3_rl/install/turtlebot3_rl --record /home/hossein/turtlebot3_rl/build/turtlebot3_rl/install.log --single-version-externally-managed
+[1.582s] running egg_info
+[1.583s] writing /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/PKG-INFO
+[1.584s] writing dependency_links to /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/dependency_links.txt
+[1.584s] writing entry points to /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/entry_points.txt
+[1.585s] writing requirements to /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/requires.txt
+[1.585s] writing top-level names to /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/top_level.txt
+[1.647s] reading manifest file '/home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/SOURCES.txt'
+[1.650s] writing manifest file '/home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/SOURCES.txt'
+[1.650s] running build
+[1.651s] running build_py
+[1.651s] running install
+[1.652s] running install_lib
+[1.654s] running install_data
+[1.655s] running install_egg_info
+[1.658s] removing '/home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/python3.6/site-packages/turtlebot3_rl-2.0.0-py3.6.egg-info' (and everything under it)
+[1.659s] Copying /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info to /home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/python3.6/site-packages/turtlebot3_rl-2.0.0-py3.6.egg-info
+[1.660s] running install_scripts
+[1.695s] Installing turtlebot3_dqn_agent script to /home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/turtlebot3_rl
+[1.696s] Installing turtlebot3_env script to /home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/turtlebot3_rl
+[1.696s] Installing turtlebot3_gazebo script to /home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/turtlebot3_rl
+[1.696s] writing list of installed files to '/home/hossein/turtlebot3_rl/build/turtlebot3_rl/install.log'
+[1.736s] Invoked command in '/home/hossein/turtlebot3_rl/src/turtlebot3_rl' returned '0': PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base /home/hossein/turtlebot3_rl/build/turtlebot3_rl build --build-base /home/hossein/turtlebot3_rl/build/turtlebot3_rl/build install --prefix /home/hossein/turtlebot3_rl/install/turtlebot3_rl --record /home/hossein/turtlebot3_rl/build/turtlebot3_rl/install.log --single-version-externally-managed

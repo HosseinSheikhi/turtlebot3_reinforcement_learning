@@ -1,0 +1,21 @@
+[0.345s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_example': AMENT_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_msgs LD_LIBRARY_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/python3.6/site-packages:/home/hossein/turtlebot3_rl/install/turtlebot3_msgs/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/hossein/turtlebot3_rl/install/turtlebot3_example --editable --build-directory /home/hossein/turtlebot3_rl/build/turtlebot3_example/build --no-deps install_data --install-dir /home/hossein/turtlebot3_rl/install/turtlebot3_example
+[0.658s] running develop
+[0.797s] running egg_info
+[0.797s] writing turtlebot3_example.egg-info/PKG-INFO
+[0.798s] writing dependency_links to turtlebot3_example.egg-info/dependency_links.txt
+[0.798s] writing entry points to turtlebot3_example.egg-info/entry_points.txt
+[0.798s] writing requirements to turtlebot3_example.egg-info/requires.txt
+[0.798s] writing top-level names to turtlebot3_example.egg-info/top_level.txt
+[0.838s] reading manifest file 'turtlebot3_example.egg-info/SOURCES.txt'
+[0.839s] writing manifest file 'turtlebot3_example.egg-info/SOURCES.txt'
+[0.841s] running build_ext
+[0.841s] Creating /home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/python3.6/site-packages/site.py
+[0.842s] Creating /home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/python3.6/site-packages/turtlebot3-example.egg-link (link to .)
+[0.843s] Installing turtlebot3_obstacle_detection script to /home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/turtlebot3_example
+[0.843s] Installing turtlebot3_patrol_client script to /home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/turtlebot3_example
+[0.843s] Installing turtlebot3_patrol_server script to /home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/turtlebot3_example
+[0.844s] Installing turtlebot3_position_control script to /home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/turtlebot3_example
+[0.844s] 
+[0.844s] Installed /home/hossein/turtlebot3_rl/build/turtlebot3_example
+[0.844s] running install_data
+[0.875s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_example' returned '0': AMENT_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_msgs LD_LIBRARY_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_msgs/lib:${LD_LIBRARY_PATH} PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ PYTHONPATH=/home/hossein/turtlebot3_rl/install/turtlebot3_example/lib/python3.6/site-packages:/home/hossein/turtlebot3_rl/install/turtlebot3_msgs/lib/python3.6/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/hossein/turtlebot3_rl/install/turtlebot3_example --editable --build-directory /home/hossein/turtlebot3_rl/build/turtlebot3_example/build --no-deps install_data --install-dir /home/hossein/turtlebot3_rl/install/turtlebot3_example

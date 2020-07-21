@@ -1,0 +1,30 @@
+[0.066s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_cartographer': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake /home/hossein/turtlebot3_rl/src/turtlebot3/turtlebot3/turtlebot3_cartographer -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hossein/turtlebot3_rl/install/turtlebot3_cartographer
+[0.909s] -- Found ament_cmake: 0.7.4 (/opt/ros/dashing/share/ament_cmake/cmake)
+[0.909s] -- Using PYTHON_EXECUTABLE: /home/hossein/tf_ros/bin/python3
+[0.909s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.909s] -- Configuring done
+[0.910s] -- Generating done
+[0.911s] -- Build files have been written to: /home/hossein/turtlebot3_rl/build/turtlebot3_cartographer
+[0.925s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_cartographer' returned '0': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake /home/hossein/turtlebot3_rl/src/turtlebot3/turtlebot3/turtlebot3_cartographer -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/hossein/turtlebot3_rl/install/turtlebot3_cartographer
+[0.926s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_cartographer': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_cartographer -- -j8 -l8
+[0.994s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_cartographer' returned '0': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_cartographer -- -j8 -l8
+[1.078s] Invoking command in '/home/hossein/turtlebot3_rl/build/turtlebot3_cartographer': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_cartographer --target install -- -j8 -l8
+[1.179s] [36mInstall the project...[0m
+[1.196s] -- Install configuration: ""
+[1.197s] -- Execute custom install script
+[1.198s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/config/turtlebot3_lds_2d.lua
+[1.218s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/launch/cartographer.launch.py
+[1.237s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/launch/occupancy_grid.launch.py
+[1.255s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/rviz/tb3_cartographer.rviz
+[1.274s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/ament_index/resource_index/package_run_dependencies/turtlebot3_cartographer
+[1.297s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/ament_index/resource_index/parent_prefix_path/turtlebot3_cartographer
+[1.317s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/environment/ament_prefix_path.sh
+[1.337s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/environment/path.sh
+[1.358s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.bash
+[1.378s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.sh
+[1.397s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/local_setup.zsh
+[1.414s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/ament_index/resource_index/packages/turtlebot3_cartographer
+[1.430s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/cmake/turtlebot3_cartographerConfig.cmake
+[1.449s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/cmake/turtlebot3_cartographerConfig-version.cmake
+[1.469s] -- Symlinking: /home/hossein/turtlebot3_rl/install/turtlebot3_cartographer/share/turtlebot3_cartographer/package.xml
+[1.501s] Invoked command in '/home/hossein/turtlebot3_rl/build/turtlebot3_cartographer' returned '0': CMAKE_PREFIX_PATH=/home/hossein/turtlebot3_rl/install/turtlebot3_rl:/opt/ros/dashing PS1=(tf_ros) \[\e]0;\u@\h: \w\a\]${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ /usr/bin/cmake --build /home/hossein/turtlebot3_rl/build/turtlebot3_cartographer --target install -- -j8 -l8
