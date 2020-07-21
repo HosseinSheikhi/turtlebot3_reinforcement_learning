@@ -1,4 +1,4 @@
-/home/hossein/turtlebot3_rl/build/*
-/home/hossein/turtlebot3_rl/install/*
-/home/hossein/turtlebot3_rl/log/*
+build/
+install/
+log/
 /.project
