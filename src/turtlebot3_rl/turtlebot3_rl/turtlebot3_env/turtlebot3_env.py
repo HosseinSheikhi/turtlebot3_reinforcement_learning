@@ -34,10 +34,10 @@ class RLEnvironment(Node):
         self.done = False
         self.fail = False
         self.succeed = False
-        self.time_out = 300
+        self.time_out = 500
         self.goal_angle = 0.0
         self.goal_distance = 1.0
-        self.init_goal_distance = 0.25
+        self.init_goal_distance = 0.5
         self.scan_ranges = []
         self.min_obstacle_distance = 10.0
 
@@ -180,12 +180,24 @@ class RLEnvironment(Node):
         """
         self.robot_pose_x = msg.pose.pose.position.x
         self.robot_pose_y = msg.pose.pose.position.y
+        _, _, self.robot_pose_theta = self.euler_from_quaternion(msg.pose.pose.orientation)
 
         goal_distance = math.sqrt(
             (self.goal_pose_x - self.robot_pose_x) ** 2
             + (self.goal_pose_y - self.robot_pose_y) ** 2)
+        path_theta = math.atan2(
+            self.goal_pose_y - self.robot_pose_y,
+            self.goal_pose_x - self.robot_pose_x)
+
+        goal_angle = path_theta - self.robot_pose_theta
+        if goal_angle > math.pi:
+            goal_angle -= 2 * math.pi
+
+        elif goal_angle < -math.pi:
+            goal_angle += 2 * math.pi
 
         self.goal_distance = goal_distance
+        self.goal_angle = goal_angle
 
     def calculate_state(self):
         """
@@ -194,8 +206,11 @@ class RLEnvironment(Node):
         :return:
         """
         state = list()
-        state.append(float(self.goal_pose_x))
-        state.append(float(self.goal_pose_y))
+        # state.append(float(self.goal_pose_x))
+        # state.append(float(self.goal_pose_y))
+        state.append(float(self.goal_distance))
+        state.append(float(self.goal_angle))
+
         for var in self.scan_ranges:
             state.append(float(var))
         self.local_step += 1
@@ -221,7 +236,7 @@ class RLEnvironment(Node):
         if self.local_step == self.time_out:
             self.get_logger().info("Time out!")
             self.done = True
-            #self.fail = True
+            # self.fail = True
             self.local_step = 0
             self.call_task_failed()
 
@@ -232,16 +247,25 @@ class RLEnvironment(Node):
         calculates the reward accumulating by agent after doing each action, feel free to change the reward function
         :return:
         """
+        yaw_reward = 1 - 2 * math.sqrt(math.fabs(self.goal_angle / math.pi))
 
-        reward = self.action_reward[action]
+        distance_reward = (2 * self.init_goal_distance) / \
+                          (self.init_goal_distance + self.goal_distance) - 1
 
+        if self.min_obstacle_distance < 0.4:
+            obstacle_reward = -1.0  # self.min_obstacle_distance - 0.45
+        else:
+            obstacle_reward = 0.0
+
+        # reward = self.action_reward[action] + (0.1 * (2-self.goal_distance)) + obstacle_reward
+        reward = yaw_reward + distance_reward + obstacle_reward
         # + for succeed, - for fail
         if self.succeed:
-            reward = 10.0
+            reward = 5.0
         elif self.fail:
-            reward = -10.0
+            reward = -5.0
 
-        #self.get_logger().info('reward: %f' % reward)
+        self.get_logger().info('reward: %f' % reward)
         return reward
 
     def rl_agent_interface_callback(self, request, response):

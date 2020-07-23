@@ -41,7 +41,7 @@ tf.config.set_visible_devices([], 'GPU')
 
 LOGGING = True
 current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage_2'
+dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage4_load_from_4400_amplitude'
 
 
 class DQNMetric(tf.keras.metrics.Metric):
@@ -76,31 +76,35 @@ class DQNAgent(Node):
         # State size and action size
         self.state_size = 26  # 12 lidar rays
         self.action_size = 5
-        self.max_training_episodes = 5000
+        self.max_training_episodes = 7000
 
         # DQN hyperparameter
         self.discount_factor = 0.99
         self.learning_rate = 0.0007
-        self.epsilon = 1.0
+        self.epsilon = 0.5
         self.step_counter = 0
-        self.epsilon_decay = 15000 * self.stage
+        self.epsilon_decay = 10000 * self.stage
         self.epsilon_min = 0.05
-        self.batch_size = 64
+        self.batch_size = 128
 
         # Replay memory
-        self.replay_memory = collections.deque(maxlen=100000)
-        self.min_replay_memory_size = 500
+        self.replay_memory = collections.deque(maxlen=200000)
+        self.min_replay_memory_size = 5000
+
+        # Data Amplitude
+        self.alpha = 0.9
+        self.beta = 1.1
 
         # Build model and target model
         self.model = self.create_qnetwork()
         self.target_model = self.create_qnetwork()
         self.update_target_model()
-        self.update_target_after = 2000
+        self.update_target_after = 5000
         self.target_update_after_counter = 0
 
         # Load saved models
-        self.load_model = False
-        self.load_episode = 0
+        self.load_model = True
+        self.load_episode = 4400
         self.model_dir_path = os.path.dirname(os.path.realpath(__file__))
         self.model_dir_path = self.model_dir_path.replace('turtlebot3_dqn/dqn_agent', 'model')
         self.model_path = os.path.join(self.model_dir_path,
@@ -148,7 +152,7 @@ class DQNAgent(Node):
 
             # Reset DQN environment
             state = self.reset_environment()
-            print(state)
+            #print(state)
             time.sleep(1.0)
 
             while True:
@@ -184,7 +188,7 @@ class DQNAgent(Node):
                 time.sleep(0.01)
 
             # Update result and save model every 10 episodes
-            if episode % 10 == 0:
+            if episode % 100 == 0:
                 self.model_path = os.path.join(
                     self.model_dir_path,
                     'stage' + str(self.stage) + '_episode' + str(episode) + '.h5')
@@ -268,6 +272,10 @@ class DQNAgent(Node):
     def append_sample(self, transition):
         self.replay_memory.append(transition)
 
+    def augment_amplitude_scaling(self, states_in_batch):
+        z = np.random.uniform(self.alpha, self.beta, size=states_in_batch.shape)
+        return states_in_batch * z
+
     def train_model(self, terminal):
         if len(self.replay_memory) < self.min_replay_memory_size:
             return
@@ -275,10 +283,12 @@ class DQNAgent(Node):
 
         current_states = np.array([transition[0] for transition in data_in_mini_batch])
         current_states = current_states.squeeze()
+        current_states = self.augment_amplitude_scaling(current_states)
         current_qvalues_list = self.model.predict(current_states)
 
         next_states = np.array([transition[3] for transition in data_in_mini_batch])
         next_states = next_states.squeeze()
+        next_states = self.augment_amplitude_scaling(next_states)
         next_qvalues_list = self.target_model.predict(next_states)
 
         x_train = []
