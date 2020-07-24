@@ -41,7 +41,7 @@ tf.config.set_visible_devices([], 'GPU')
 
 LOGGING = True
 current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage4_load_from_4400_amplitude'
+dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage4_load_from_4400_double_fake'
 
 
 class DQNMetric(tf.keras.metrics.Metric):
@@ -74,7 +74,7 @@ class DQNAgent(Node):
         self.stage = int(stage)
 
         # State size and action size
-        self.state_size = 26  # 12 lidar rays
+        self.state_size = 26  # 24 lidar rays
         self.action_size = 5
         self.max_training_episodes = 7000
 
@@ -85,10 +85,11 @@ class DQNAgent(Node):
         self.step_counter = 0
         self.epsilon_decay = 10000 * self.stage
         self.epsilon_min = 0.05
-        self.batch_size = 128
+        self.batch_size = 64
 
         # Replay memory
         self.replay_memory = collections.deque(maxlen=200000)
+        self.fake_replay_memory = collections.deque(maxlen=200000)
         self.min_replay_memory_size = 5000
 
         # Data Amplitude
@@ -151,21 +152,23 @@ class DQNAgent(Node):
             score = 0
 
             # Reset DQN environment
-            state = self.reset_environment()
-            #print(state)
+            state, fake_state = self.reset_environment()
+            # print(state)
             time.sleep(1.0)
 
             while True:
                 local_step += 1
                 action = int(self.get_action(state))
 
-                next_state, reward, done = self.step(action)
+                next_state, next_fake_state, reward, done = self.step(action)
                 score += reward
 
                 self.append_sample((state, action, reward, next_state, done))
+                self.append_fake_sample((fake_state, action, reward, next_fake_state, done))
 
                 self.train_model(done)
                 state = next_state
+                fake_state = next_fake_state
                 if done:
                     if LOGGING:
                         self.dqn_reward_metric.update_state(score)
@@ -198,6 +201,16 @@ class DQNAgent(Node):
                         'stage' + str(self.stage) + '_episode' + str(episode) + '.json'), 'w') as outfile:
                     json.dump(param_dictionary, outfile)
 
+    def distinct_fake_state(self, double_state):
+        state = double_state[2::2]
+        fake_state = double_state[3::2]
+        state = np.insert(state, 0, double_state[1], axis=0)
+        state = np.insert(state, 0, double_state[0], axis=0)
+
+        fake_state = np.insert(fake_state, 0, double_state[1], axis=0)
+        fake_state = np.insert(fake_state, 0, double_state[0], axis=0)
+        return state, fake_state
+
     def env_make(self):
         while not self.make_environment_client.wait_for_service(timeout_sec=1.0):
             self.get_logger().warn('Environment make client failed to connect to the server, try again ...')
@@ -212,13 +225,15 @@ class DQNAgent(Node):
 
         rclpy.spin_until_future_complete(self, future)
         if future.result() is not None:
-            state = future.result().state
+            double_state = future.result().state
+            state, fake_state = self.distinct_fake_state(double_state)
             state = np.reshape(np.asarray(state), [1, self.state_size])
+            fake_state = np.reshape(np.asarray(fake_state), [1, self.state_size])
         else:
             self.get_logger().error(
                 'Exception while calling service: {0}'.format(future.exception()))
 
-        return state
+        return state, fake_state
 
     def step(self, action):
         # Send action and receive next state and reward
@@ -234,20 +249,22 @@ class DQNAgent(Node):
 
         if future.result() is not None:
             # Next state and reward
-            next_state = future.result().state
+            next_double_state = future.result().state
+            next_state, next_fake_state = self.distinct_fake_state(next_double_state)
             next_state = np.reshape(np.asarray(next_state), [1, self.state_size])
+            next_fake_state = np.reshape(np.asarray(next_fake_state), [1, self.state_size])
             reward = future.result().reward
             done = future.result().done
         else:
             self.get_logger().error(
                 'Exception while calling service: {0}'.format(future.exception()))
-        return next_state, reward, done
+        return next_state, next_fake_state, reward, done
 
     def create_qnetwork(self):
         model = Sequential()
         model.add(Dense(256, input_shape=(self.state_size,), activation='relu'))
         model.add(Dense(128, activation='relu'))
-        #model.add(Dense(128, activation='relu'))
+        # model.add(Dense(128, activation='relu'))
         model.add(Dense(self.action_size, activation='linear'))
         model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
         model.summary()
@@ -272,6 +289,9 @@ class DQNAgent(Node):
     def append_sample(self, transition):
         self.replay_memory.append(transition)
 
+    def append_fake_sample(self, transition):
+        self.fake_replay_memory.append(transition)
+
     def augment_amplitude_scaling(self, states_in_batch):
         z = np.random.uniform(self.alpha, self.beta, size=states_in_batch.shape)
         return states_in_batch * z
@@ -279,45 +299,50 @@ class DQNAgent(Node):
     def train_model(self, terminal):
         if len(self.replay_memory) < self.min_replay_memory_size:
             return
-        data_in_mini_batch = rnd.sample(self.replay_memory, self.batch_size)
-
-        current_states = np.array([transition[0] for transition in data_in_mini_batch])
-        current_states = current_states.squeeze()
-        current_states = self.augment_amplitude_scaling(current_states)
-        current_qvalues_list = self.model.predict(current_states)
-
-        next_states = np.array([transition[3] for transition in data_in_mini_batch])
-        next_states = next_states.squeeze()
-        next_states = self.augment_amplitude_scaling(next_states)
-        next_qvalues_list = self.target_model.predict(next_states)
-
-        x_train = []
-        y_train = []
-
-        for index, (current_state, action, reward, next_state, done) in enumerate(data_in_mini_batch):
-            if not done:
-                future_reward = np.max(next_qvalues_list[index])
-                desired_q = reward + self.discount_factor * future_reward
+        for i in range(2):
+            if i == 0:
+                data_in_mini_batch = rnd.sample(self.replay_memory, self.batch_size)
             else:
-                desired_q = reward
+                data_in_mini_batch = rnd.sample(self.fake_replay_memory, self.batch_size)
 
-            current_q_values = current_qvalues_list[index]
-            current_q_values[action] = desired_q
+            current_states = np.array([transition[0] for transition in data_in_mini_batch])
+            current_states = current_states.squeeze()
+            #current_states = self.augment_amplitude_scaling(current_states)
+            current_qvalues_list = self.model.predict(current_states)
 
-            x_train.append(current_state)
-            y_train.append(current_q_values)
+            next_states = np.array([transition[3] for transition in data_in_mini_batch])
+            next_states = next_states.squeeze()
+            #next_states = self.augment_amplitude_scaling(next_states)
+            next_qvalues_list = self.target_model.predict(next_states)
 
-        x_train = np.array(x_train)
-        y_train = np.array(y_train)
-        x_train = np.reshape(x_train, [len(data_in_mini_batch), self.state_size])
-        y_train = np.reshape(y_train, [len(data_in_mini_batch), self.action_size])
+            x_train = []
+            y_train = []
 
-        self.model.fit(tf.convert_to_tensor(x_train, tf.float32), tf.convert_to_tensor(y_train, tf.float32),
-                       batch_size=self.batch_size, verbose=0)
-        self.target_update_after_counter += 1
+            for index, (current_state, action, reward, next_state, done) in enumerate(data_in_mini_batch):
+                if not done:
+                    future_reward = np.max(next_qvalues_list[index])
+                    desired_q = reward + self.discount_factor * future_reward
+                else:
+                    desired_q = reward
 
-        if self.target_update_after_counter > self.update_target_after and terminal:
-            self.update_target_model()
+                current_q_values = current_qvalues_list[index]
+                current_q_values[action] = desired_q
+
+                x_train.append(current_state)
+                y_train.append(current_q_values)
+
+            x_train = np.array(x_train)
+            y_train = np.array(y_train)
+            x_train = np.reshape(x_train, [len(data_in_mini_batch), self.state_size])
+            y_train = np.reshape(y_train, [len(data_in_mini_batch), self.action_size])
+
+            self.model.fit(tf.convert_to_tensor(x_train, tf.float32), tf.convert_to_tensor(y_train, tf.float32),
+                           batch_size=self.batch_size, verbose=0)
+            if i==0:
+                self.target_update_after_counter += 1
+
+                if self.target_update_after_counter > self.update_target_after and terminal:
+                    self.update_target_model()
 
 
 def main(args=sys.argv[1]):
