@@ -9,11 +9,7 @@ setup.py
 /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/top_level.txt
 /home/hossein/turtlebot3_rl/build/turtlebot3_rl/turtlebot3_rl.egg-info/zip-safe
 resource/turtlebot3_rl
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py
 turtlebot3_rl/__init__.py
-turtlebot3_rl.egg-info/PKG-INFO
-turtlebot3_rl.egg-info/SOURCES.txt
-turtlebot3_rl.egg-info/dependency_links.txt
-turtlebot3_rl.egg-info/entry_points.txt
-turtlebot3_rl.egg-info/requires.txt
-turtlebot3_rl.egg-info/top_level.txt
-turtlebot3_rl.egg-info/zip-safe

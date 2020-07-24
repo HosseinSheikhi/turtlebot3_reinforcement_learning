@@ -25,6 +25,7 @@ class RLEnvironment(Node):
         """**************************************************************
                                 Initialize variables
         **************************************************************"""
+        self.train_mode = False
         self.goal_pose_x = 0.0
         self.goal_pose_y = 0.0
         self.robot_pose_x = 0.0
@@ -247,24 +248,31 @@ class RLEnvironment(Node):
         calculates the reward accumulating by agent after doing each action, feel free to change the reward function
         :return:
         """
-        yaw_reward = 1 - 2 * math.sqrt(math.fabs(self.goal_angle / math.pi))
+        if self.train_mode:
+            yaw_reward = 1 - 2 * math.sqrt(math.fabs(self.goal_angle / math.pi))
 
-        distance_reward = (2 * self.init_goal_distance) / \
-                          (self.init_goal_distance + self.goal_distance) - 1
+            distance_reward = (2 * self.init_goal_distance) / \
+                              (self.init_goal_distance + self.goal_distance) - 1
 
-        if self.min_obstacle_distance < 0.4:
-            obstacle_reward = -1.0  # self.min_obstacle_distance - 0.45
+            if self.min_obstacle_distance < 0.4:
+                obstacle_reward = -1.0  # self.min_obstacle_distance - 0.45
+            else:
+                obstacle_reward = 0.0
+
+            # reward = self.action_reward[action] + (0.1 * (2-self.goal_distance)) + obstacle_reward
+            reward = yaw_reward + distance_reward + obstacle_reward
+            # + for succeed, - for fail
+            if self.succeed:
+                reward = 5.0
+            elif self.fail:
+                reward = -5.0
         else:
-            obstacle_reward = 0.0
-
-        # reward = self.action_reward[action] + (0.1 * (2-self.goal_distance)) + obstacle_reward
-        reward = yaw_reward + distance_reward + obstacle_reward
-        # + for succeed, - for fail
-        if self.succeed:
-            reward = 5.0
-        elif self.fail:
-            reward = -5.0
-
+            if self.succeed:
+                reward = 5.0
+            elif self.fail:
+                reward = -5.0
+            else:
+                reward = 0.0
         self.get_logger().info('reward: %f' % reward)
         return reward
 

@@ -10,13 +10,6 @@ setup.py
 /home/hossein/turtlebot3_rl/build/turtlebot3_example/turtlebot3_example.egg-info/zip-safe
 resource/turtlebot3_example
 turtlebot3_example/__init__.py
-turtlebot3_example.egg-info/PKG-INFO
-turtlebot3_example.egg-info/SOURCES.txt
-turtlebot3_example.egg-info/dependency_links.txt
-turtlebot3_example.egg-info/entry_points.txt
-turtlebot3_example.egg-info/requires.txt
-turtlebot3_example.egg-info/top_level.txt
-turtlebot3_example.egg-info/zip-safe
 turtlebot3_example/turtlebot3_obstacle_detection/__init__.py
 turtlebot3_example/turtlebot3_obstacle_detection/main.py
 turtlebot3_example/turtlebot3_obstacle_detection/turtlebot3_obstacle_detection.py

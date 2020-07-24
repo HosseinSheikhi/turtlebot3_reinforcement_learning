@@ -41,7 +41,7 @@ tf.config.set_visible_devices([], 'GPU')
 
 LOGGING = True
 current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage4_load_from_4400_double_fake'
+dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage2_test_load_from_6900_double_fake'
 
 
 class DQNMetric(tf.keras.metrics.Metric):
@@ -72,11 +72,11 @@ class DQNAgent(Node):
         ************************************************************"""
         # Stage
         self.stage = int(stage)
-
+        self.train_mode = False
         # State size and action size
         self.state_size = 26  # 24 lidar rays
         self.action_size = 5
-        self.max_training_episodes = 7000
+        self.max_training_episodes = 10000
 
         # DQN hyperparameter
         self.discount_factor = 0.99
@@ -105,7 +105,7 @@ class DQNAgent(Node):
 
         # Load saved models
         self.load_model = True
-        self.load_episode = 4400
+        self.load_episode = 6900
         self.model_dir_path = os.path.dirname(os.path.realpath(__file__))
         self.model_dir_path = self.model_dir_path.replace('turtlebot3_dqn/dqn_agent', 'model')
         self.model_path = os.path.join(self.model_dir_path,
@@ -163,10 +163,12 @@ class DQNAgent(Node):
                 next_state, next_fake_state, reward, done = self.step(action)
                 score += reward
 
-                self.append_sample((state, action, reward, next_state, done))
-                self.append_fake_sample((fake_state, action, reward, next_fake_state, done))
 
-                self.train_model(done)
+                if self.train_mode:
+                    self.append_sample((state, action, reward, next_state, done))
+                    self.append_fake_sample((fake_state, action, reward, next_fake_state, done))
+                    self.train_model(done)
+
                 state = next_state
                 fake_state = next_fake_state
                 if done:
@@ -191,15 +193,16 @@ class DQNAgent(Node):
                 time.sleep(0.01)
 
             # Update result and save model every 10 episodes
-            if episode % 100 == 0:
-                self.model_path = os.path.join(
-                    self.model_dir_path,
-                    'stage' + str(self.stage) + '_episode' + str(episode) + '.h5')
-                self.model.save(self.model_path)
-                with open(os.path.join(
+            if self.train_mode:
+                if episode % 100 == 0:
+                    self.model_path = os.path.join(
                         self.model_dir_path,
-                        'stage' + str(self.stage) + '_episode' + str(episode) + '.json'), 'w') as outfile:
-                    json.dump(param_dictionary, outfile)
+                        'stage' + str(self.stage) + '_episode' + str(episode) + '.h5')
+                    self.model.save(self.model_path)
+                    with open(os.path.join(
+                            self.model_dir_path,
+                            'stage' + str(self.stage) + '_episode' + str(episode) + '.json'), 'w') as outfile:
+                        json.dump(param_dictionary, outfile)
 
     def distinct_fake_state(self, double_state):
         state = double_state[2::2]
@@ -277,12 +280,15 @@ class DQNAgent(Node):
         print("*Target model updated*")
 
     def get_action(self, state):
-        self.step_counter += 1
-        self.epsilon = self.epsilon_min + (0.5 - self.epsilon_min) * math.exp(
-            -1.0 * self.step_counter / self.epsilon_decay)
-        lucky = rnd.random()
-        if lucky > (1 - self.epsilon):
-            return rnd.randint(0, self.action_size - 1)
+        if self.train_mode:
+            self.step_counter += 1
+            self.epsilon = self.epsilon_min + (0.5 - self.epsilon_min) * math.exp(
+                -1.0 * self.step_counter / self.epsilon_decay)
+            lucky = rnd.random()
+            if lucky > (1 - self.epsilon):
+                return rnd.randint(0, self.action_size - 1)
+            else:
+                return np.argmax(self.model.predict(state))
         else:
             return np.argmax(self.model.predict(state))
 
