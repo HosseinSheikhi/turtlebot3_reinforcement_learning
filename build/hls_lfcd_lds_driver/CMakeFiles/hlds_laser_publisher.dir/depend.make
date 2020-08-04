@@ -133,6 +133,7 @@ CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/das
 CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/hlds_laser_publisher.dir/src/hlds_laser_publisher.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp

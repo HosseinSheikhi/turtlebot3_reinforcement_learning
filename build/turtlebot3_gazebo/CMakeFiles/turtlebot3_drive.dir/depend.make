@@ -151,6 +151,7 @@ CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/inc
 CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_drive.dir/src/turtlebot3_drive.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp

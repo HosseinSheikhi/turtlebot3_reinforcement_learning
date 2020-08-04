@@ -1143,6 +1143,8 @@ rclcpp/utilities.hpp
 /opt/ros/dashing/include/rclcpp/rclcpp/utilities.hpp
 rclcpp/visibility_control.hpp
 /opt/ros/dashing/include/rclcpp/rclcpp/visibility_control.hpp
+rclcpp/scope_exit.hpp
+/opt/ros/dashing/include/rclcpp/rclcpp/scope_exit.hpp
 
 /opt/ros/dashing/include/rclcpp/executors.hpp
 future
@@ -2021,6 +2023,12 @@ rclcpp/visibility_control.hpp
 /opt/ros/dashing/include/rclcpp/rclcpp/visibility_control.hpp
 rclcpp/waitable.hpp
 /opt/ros/dashing/include/rclcpp/rclcpp/waitable.hpp
+
+/opt/ros/dashing/include/rclcpp/scope_exit.hpp
+functional
+-
+rclcpp/macros.hpp
+/opt/ros/dashing/include/rclcpp/rclcpp/macros.hpp
 
 /opt/ros/dashing/include/rclcpp/service.hpp
 functional

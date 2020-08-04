@@ -41,7 +41,7 @@ tf.config.set_visible_devices([], 'GPU')
 
 LOGGING = True
 current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage4_load_from_4400_amplitude'
+dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage2_usual_180_ray'
 
 
 class DQNMetric(tf.keras.metrics.Metric):
@@ -72,23 +72,23 @@ class DQNAgent(Node):
         ************************************************************"""
         # Stage
         self.stage = int(stage)
-
+        self.train_mode = True
         # State size and action size
-        self.state_size = 26  # 12 lidar rays
+        self.state_size = 182  # 24 lidar rays
         self.action_size = 5
-        self.max_training_episodes = 7000
+        self.max_training_episodes = 10003
 
         # DQN hyperparameter
         self.discount_factor = 0.99
         self.learning_rate = 0.0007
-        self.epsilon = 0.5
+        self.epsilon = 1.0
         self.step_counter = 0
-        self.epsilon_decay = 10000 * self.stage
+        self.epsilon_decay = 20000 * self.stage
         self.epsilon_min = 0.05
         self.batch_size = 128
 
         # Replay memory
-        self.replay_memory = collections.deque(maxlen=200000)
+        self.replay_memory = collections.deque(maxlen=500000)
         self.min_replay_memory_size = 5000
 
         # Data Amplitude
@@ -103,8 +103,8 @@ class DQNAgent(Node):
         self.target_update_after_counter = 0
 
         # Load saved models
-        self.load_model = True
-        self.load_episode = 4400
+        self.load_model = False
+        self.load_episode = 0
         self.model_dir_path = os.path.dirname(os.path.realpath(__file__))
         self.model_dir_path = self.model_dir_path.replace('turtlebot3_dqn/dqn_agent', 'model')
         self.model_path = os.path.join(self.model_dir_path,
@@ -162,9 +162,10 @@ class DQNAgent(Node):
                 next_state, reward, done = self.step(action)
                 score += reward
 
-                self.append_sample((state, action, reward, next_state, done))
+                if self.train_mode:
+                    self.append_sample((state, action, reward, next_state, done))
+                    self.train_model(done)
 
-                self.train_model(done)
                 state = next_state
                 if done:
                     if LOGGING:
@@ -188,15 +189,16 @@ class DQNAgent(Node):
                 time.sleep(0.01)
 
             # Update result and save model every 10 episodes
-            if episode % 100 == 0:
-                self.model_path = os.path.join(
-                    self.model_dir_path,
-                    'stage' + str(self.stage) + '_episode' + str(episode) + '.h5')
-                self.model.save(self.model_path)
-                with open(os.path.join(
+            if self.train_mode:
+                if episode % 100 == 0:
+                    self.model_path = os.path.join(
                         self.model_dir_path,
-                        'stage' + str(self.stage) + '_episode' + str(episode) + '.json'), 'w') as outfile:
-                    json.dump(param_dictionary, outfile)
+                        'stage' + str(self.stage) + '_episode' + str(episode) + '.h5')
+                    self.model.save(self.model_path)
+                    with open(os.path.join(
+                            self.model_dir_path,
+                            'stage' + str(self.stage) + '_episode' + str(episode) + '.json'), 'w') as outfile:
+                        json.dump(param_dictionary, outfile)
 
     def env_make(self):
         while not self.make_environment_client.wait_for_service(timeout_sec=1.0):
@@ -245,9 +247,9 @@ class DQNAgent(Node):
 
     def create_qnetwork(self):
         model = Sequential()
-        model.add(Dense(256, input_shape=(self.state_size,), activation='relu'))
+        model.add(Dense(512, input_shape=(self.state_size,), activation='relu'))
+        model.add(Dense(256, activation='relu'))
         model.add(Dense(128, activation='relu'))
-        #model.add(Dense(128, activation='relu'))
         model.add(Dense(self.action_size, activation='linear'))
         model.compile(loss='mse', optimizer=Adam(lr=self.learning_rate))
         model.summary()
@@ -260,12 +262,15 @@ class DQNAgent(Node):
         print("*Target model updated*")
 
     def get_action(self, state):
-        self.step_counter += 1
-        self.epsilon = self.epsilon_min + (0.5 - self.epsilon_min) * math.exp(
-            -1.0 * self.step_counter / self.epsilon_decay)
-        lucky = rnd.random()
-        if lucky > (1 - self.epsilon):
-            return rnd.randint(0, self.action_size - 1)
+        if self.train_mode:
+            self.step_counter += 1
+            self.epsilon = self.epsilon_min + (1.0 - self.epsilon_min) * math.exp(
+                -1.0 * self.step_counter / self.epsilon_decay)
+            lucky = rnd.random()
+            if lucky > (1 - self.epsilon):
+                return rnd.randint(0, self.action_size - 1)
+            else:
+                return np.argmax(self.model.predict(state))
         else:
             return np.argmax(self.model.predict(state))
 
@@ -283,12 +288,12 @@ class DQNAgent(Node):
 
         current_states = np.array([transition[0] for transition in data_in_mini_batch])
         current_states = current_states.squeeze()
-        current_states = self.augment_amplitude_scaling(current_states)
+        #current_states = self.augment_amplitude_scaling(current_states)
         current_qvalues_list = self.model.predict(current_states)
 
         next_states = np.array([transition[3] for transition in data_in_mini_batch])
         next_states = next_states.squeeze()
-        next_states = self.augment_amplitude_scaling(next_states)
+        #next_states = self.augment_amplitude_scaling(next_states)
         next_qvalues_list = self.target_model.predict(next_states)
 
         x_train = []

@@ -25,6 +25,7 @@ class RLEnvironment(Node):
         """**************************************************************
                                 Initialize variables
         **************************************************************"""
+        self.train_mode = True
         self.goal_pose_x = 0.0
         self.goal_pose_y = 0.0
         self.robot_pose_x = 0.0
@@ -34,7 +35,7 @@ class RLEnvironment(Node):
         self.done = False
         self.fail = False
         self.succeed = False
-        self.time_out = 500
+        self.time_out = 1000
         self.goal_angle = 0.0
         self.goal_distance = 1.0
         self.init_goal_distance = 0.5
@@ -44,7 +45,7 @@ class RLEnvironment(Node):
         self.local_step = 0
 
         self.stop_cmd_vel_timer = None
-        self.angular_vel = [1.4, 0.7, 0.0, -0.7, -1.4]
+        self.angular_vel = [1.0, 0.5, 0.0, -0.5, -1.0]
         self.action_reward = [-0.02, -0.015, 0.0, -0.015, -0.02]
         """************************************************************
                  Initialise publisher, subscribers, clients and services
@@ -247,24 +248,30 @@ class RLEnvironment(Node):
         calculates the reward accumulating by agent after doing each action, feel free to change the reward function
         :return:
         """
-        yaw_reward = 1 - 2 * math.sqrt(math.fabs(self.goal_angle / math.pi))
+        if self.train_mode:
+            yaw_reward = 1 - 2 * math.sqrt(math.fabs(self.goal_angle / math.pi))
 
-        distance_reward = (2 * self.init_goal_distance) / \
-                          (self.init_goal_distance + self.goal_distance) - 1
+            distance_reward = (2 * self.init_goal_distance) / \
+                              (self.init_goal_distance + self.goal_distance) - 1
 
-        if self.min_obstacle_distance < 0.4:
-            obstacle_reward = -1.0  # self.min_obstacle_distance - 0.45
-        else:
             obstacle_reward = 0.0
+            if self.min_obstacle_distance < 0.50:
+                obstacle_reward = -3.0  # self.min_obstacle_distance - 0.45
 
-        # reward = self.action_reward[action] + (0.1 * (2-self.goal_distance)) + obstacle_reward
-        reward = yaw_reward + distance_reward + obstacle_reward
-        # + for succeed, - for fail
-        if self.succeed:
-            reward = 5.0
-        elif self.fail:
-            reward = -5.0
-
+            # reward = self.action_reward[action] + (0.1 * (2-self.goal_distance)) + obstacle_reward
+            reward = distance_reward + obstacle_reward  # + yaw_reward
+            # + for succeed, - for fail
+            if self.succeed:
+                reward = 7.0
+            elif self.fail:
+                reward = -7.0
+        else:
+            if self.succeed:
+                reward = 5.0
+            elif self.fail:
+                reward = -5.0
+            else:
+                reward = 0.0
         self.get_logger().info('reward: %f' % reward)
         return reward
 
@@ -278,14 +285,14 @@ class RLEnvironment(Node):
         """
         action = request.action
         twist = Twist()
-        twist.linear.x = 0.3
+        twist.linear.x = 0.15
         twist.angular.z = self.angular_vel[action]
         self.cmd_vel_pub.publish(twist)
         if self.stop_cmd_vel_timer is None:
-            self.stop_cmd_vel_timer = self.create_timer(1.2, self.timer_callback)
+            self.stop_cmd_vel_timer = self.create_timer(1.8, self.timer_callback)
         else:
             self.destroy_timer(self.stop_cmd_vel_timer)
-            self.stop_cmd_vel_timer = self.create_timer(1.2, self.timer_callback)
+            self.stop_cmd_vel_timer = self.create_timer(1.8, self.timer_callback)
 
         response.state = self.calculate_state()
         response.reward = self.calculate_reward(action)

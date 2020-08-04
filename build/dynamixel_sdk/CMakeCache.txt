@@ -32,7 +32,7 @@ AMENT_CMAKE_SYMLINK_INSTALL:BOOL=1
 AMENT_CMAKE_UNINSTALL_TARGET:BOOL=ON
 
 //The path where test results are generated
-AMENT_TEST_RESULTS_DIR:STRING=/home/hossein/turtlebot3_rl/build/dynamixel_sdk/test_results
+AMENT_TEST_RESULTS_DIR:PATH=/home/hossein/turtlebot3_rl/build/dynamixel_sdk/test_results
 
 //Build the testing tree.
 BUILD_TESTING:BOOL=ON

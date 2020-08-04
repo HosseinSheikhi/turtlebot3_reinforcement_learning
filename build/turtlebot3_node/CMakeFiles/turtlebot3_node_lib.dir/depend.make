@@ -143,6 +143,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashi
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/motor_power.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -341,6 +342,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/inc
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/reset.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -542,6 +544,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/inc
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/devices/sound.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -762,6 +765,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/das
 CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/diff_drive_controller.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -1026,6 +1030,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/
 CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/odometry.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -1240,6 +1245,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/das
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/battery_state.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -1444,6 +1450,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/inclu
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/imu.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -1647,6 +1654,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashi
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/joint_state.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -1850,6 +1858,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dash
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/sensors/sensor_state.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
@@ -2097,6 +2106,7 @@ CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/includ
 CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_node_lib.dir/src/turtlebot3.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp

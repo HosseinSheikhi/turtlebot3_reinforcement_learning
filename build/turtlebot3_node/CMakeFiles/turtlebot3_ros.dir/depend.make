@@ -194,6 +194,7 @@ CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclc
 CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/qos_event.hpp
 CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/rate.hpp
 CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/rclcpp.hpp
+CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/scope_exit.hpp
 CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/service.hpp
 CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/subscription.hpp
 CMakeFiles/turtlebot3_ros.dir/src/node_main.cpp.o: /opt/ros/dashing/include/rclcpp/subscription_base.hpp
