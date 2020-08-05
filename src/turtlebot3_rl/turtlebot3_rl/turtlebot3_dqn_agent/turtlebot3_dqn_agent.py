@@ -1,21 +1,3 @@
-#!/usr/bin/env python3
-#
-# Copyright 2019 ROBOTIS CO., LTD.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-# Authors: Ryan Shim, Gilbert
-
 import collections
 import datetime
 import json
@@ -41,7 +23,7 @@ tf.config.set_visible_devices([], 'GPU')
 
 LOGGING = True
 current_time = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage2_usual_180_ray'
+dqn_reward_log_dir = 'logs/gradient_tape/' + current_time + '/dqn_stage4_usual_180_ray_yaw_reward'
 
 
 class DQNMetric(tf.keras.metrics.Metric):
@@ -74,7 +56,7 @@ class DQNAgent(Node):
         self.stage = int(stage)
         self.train_mode = True
         # State size and action size
-        self.state_size = 182  # 24 lidar rays
+        self.state_size = 182  # 180 lidar rays
         self.action_size = 5
         self.max_training_episodes = 10003
 
@@ -90,10 +72,6 @@ class DQNAgent(Node):
         # Replay memory
         self.replay_memory = collections.deque(maxlen=500000)
         self.min_replay_memory_size = 5000
-
-        # Data Amplitude
-        self.alpha = 0.9
-        self.beta = 1.1
 
         # Build model and target model
         self.model = self.create_qnetwork()
@@ -130,14 +108,11 @@ class DQNAgent(Node):
         self.rl_agent_interface_client = self.create_client(Dqn, 'rl_agent_interface')
         self.make_environment_client = self.create_client(Empty, 'make_environment')
         self.reset_environment_client = self.create_client(Dqn, 'reset_environment')
+
         """************************************************************
         ** Start process
         ************************************************************"""
         self.process()
-
-    """*******************************************************************************
-    ** Callback functions and relevant functions
-    *******************************************************************************"""
 
     def process(self):
         self.env_make()
@@ -152,7 +127,6 @@ class DQNAgent(Node):
 
             # Reset DQN environment
             state = self.reset_environment()
-            #print(state)
             time.sleep(1.0)
 
             while True:
@@ -188,7 +162,7 @@ class DQNAgent(Node):
                 # While loop rate
                 time.sleep(0.01)
 
-            # Update result and save model every 10 episodes
+            # Update result and save model every 100 episodes
             if self.train_mode:
                 if episode % 100 == 0:
                     self.model_path = os.path.join(
@@ -277,10 +251,6 @@ class DQNAgent(Node):
     def append_sample(self, transition):
         self.replay_memory.append(transition)
 
-    def augment_amplitude_scaling(self, states_in_batch):
-        z = np.random.uniform(self.alpha, self.beta, size=states_in_batch.shape)
-        return states_in_batch * z
-
     def train_model(self, terminal):
         if len(self.replay_memory) < self.min_replay_memory_size:
             return
@@ -288,12 +258,10 @@ class DQNAgent(Node):
 
         current_states = np.array([transition[0] for transition in data_in_mini_batch])
         current_states = current_states.squeeze()
-        #current_states = self.augment_amplitude_scaling(current_states)
         current_qvalues_list = self.model.predict(current_states)
 
         next_states = np.array([transition[3] for transition in data_in_mini_batch])
         next_states = next_states.squeeze()
-        #next_states = self.augment_amplitude_scaling(next_states)
         next_qvalues_list = self.target_model.predict(next_states)
 
         x_train = []

@@ -16,7 +16,7 @@ import math
 
 class RLEnvironment(Node):
     """
-    A node which has to act as an interface between (rl_agent and simulator_agent)
+    A node which has to act as an interface between (rl_agent and gazebo_interface)
     It has to implement make(), step(), and reset() like as an environment implemented in OpenAI gym
     """
 
@@ -25,6 +25,9 @@ class RLEnvironment(Node):
         """**************************************************************
                                 Initialize variables
         **************************************************************"""
+        """
+            if train_mode is not equal to True it will run on test mode
+        """
         self.train_mode = True
         self.goal_pose_x = 0.0
         self.goal_pose_y = 0.0
@@ -32,10 +35,14 @@ class RLEnvironment(Node):
         self.robot_pose_y = 0.0
 
         self.action_size = 5
+        # time_out shows the maximum number of actions in each episode
+        self.time_out = 1000
+
         self.done = False
         self.fail = False
         self.succeed = False
-        self.time_out = 1000
+
+        # parameters to calculate the reward
         self.goal_angle = 0.0
         self.goal_distance = 1.0
         self.init_goal_distance = 0.5
@@ -43,10 +50,9 @@ class RLEnvironment(Node):
         self.min_obstacle_distance = 10.0
 
         self.local_step = 0
-
         self.stop_cmd_vel_timer = None
         self.angular_vel = [1.0, 0.5, 0.0, -0.5, -1.0]
-        self.action_reward = [-0.02, -0.015, 0.0, -0.015, -0.02]
+
         """************************************************************
                  Initialise publisher, subscribers, clients and services
         ************************************************************"""
@@ -96,7 +102,7 @@ class RLEnvironment(Node):
         rclpy.spin_until_future_complete(self, future)
         response = future.result()
         if not response.success:
-            self.get_logger().error('initialize service call failed')
+            self.get_logger().error('initialize environment request failed')
 
         else:
             self.goal_pose_x = response.pose_x
@@ -107,7 +113,7 @@ class RLEnvironment(Node):
         """
         gives service to the rl_agent reset environment
         :param request: Dqn request
-        :param response: Dqn response
+        :param response: Dqn response (state of the robot: lidar_rays + robot pose (or robots distance to goal and its heading angle to goal))
         :return:
         """
         response.state = self.calculate_state()
@@ -237,7 +243,6 @@ class RLEnvironment(Node):
         if self.local_step == self.time_out:
             self.get_logger().info("Time out!")
             self.done = True
-            # self.fail = True
             self.local_step = 0
             self.call_task_failed()
 
@@ -259,12 +264,12 @@ class RLEnvironment(Node):
                 obstacle_reward = -3.0  # self.min_obstacle_distance - 0.45
 
             # reward = self.action_reward[action] + (0.1 * (2-self.goal_distance)) + obstacle_reward
-            reward = distance_reward + obstacle_reward  # + yaw_reward
+            reward = distance_reward + obstacle_reward + yaw_reward
             # + for succeed, - for fail
             if self.succeed:
-                reward = 7.0
+                reward = 15.0
             elif self.fail:
-                reward = -7.0
+                reward = -10.0
         else:
             if self.succeed:
                 reward = 5.0
@@ -272,7 +277,9 @@ class RLEnvironment(Node):
                 reward = -5.0
             else:
                 reward = 0.0
-        self.get_logger().info('reward: %f' % reward)
+        self.get_logger().info('reward: %f ' % reward)
+        self.get_logger().info('yaw reward: %f ' % yaw_reward)
+
         return reward
 
     def rl_agent_interface_callback(self, request, response):
@@ -285,6 +292,7 @@ class RLEnvironment(Node):
         """
         action = request.action
         twist = Twist()
+        # robot always receives a (constant linear velocity + a variable angular velocity)
         twist.linear.x = 0.15
         twist.angular.z = self.angular_vel[action]
         self.cmd_vel_pub.publish(twist)
